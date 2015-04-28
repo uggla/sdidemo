@@ -1,0 +1,27 @@
+- name: Clean Servers old identities and gather the new ones
+  hosts: all
+  gather_facts: False
+  remote_user: sdi
+  sudo: False
+  serial: 1
+  
+  vars: 
+    - home_dir: "~"
+    - known_hosts_file: "{{ home_dir }}/.ssh/known_hosts"
+  
+  tasks:
+
+    - name: get the IP via external mean
+      shell: dig +short {{ inventory_hostname }}
+      register: dig_result
+      delegate_to: localhost
+
+    - name: remove target host old servers identities from local known_hosts list
+      shell: ssh-keygen -R  {{ item }}
+      with_items:
+        - "{{ inventory_hostname }}"
+      delegate_to: localhost
+       
+    - name: get target host current fingerprint
+      shell: ssh-keyscan {{ hash_option | default("")}} {{ inventory_hostname }} >> {{ known_hosts_file }}
+      delegate_to: localhost

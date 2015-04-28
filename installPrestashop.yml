@@ -1,0 +1,75 @@
+- name: Install prestashop
+  hosts: web
+  gather_facts: False
+  remote_user: root
+  
+  vars: 
+    - home_dir: "~"
+    - package_dir: "~/ansible/packages"
+    - prestashop_package: "{{ package_dir }}/prestashop_1.6.0.14.zip"
+    - known_hosts_file: "{{ home_dir }}/.ssh/known_hosts"
+  
+  tasks:
+    - name: Update source list
+      copy: src=/etc/apt/sources.list dest=/etc/apt/sources.list owner=root group=root mode=0644
+      copy: src=/etc/apt/trusted.gpg dest=/etc/apt/trusted.gpg owner=root group=root mode=0644
+      #replace: dest=/etc/apt/sources.list regexp='10\.3\.8\.27' replace='fr.archive.ubuntu.com' backup=yes
+
+    - name: Install unzip
+      apt: name=unzip state=present
+
+    - name: Install php
+      apt: name=php5 state=present
+
+    - name: Install mysql-server
+      apt: name=mysql-server-5.6 state=present
+
+    - name: Install mysql-client
+      apt: name=mysql-client-5.6 state=present
+    
+    - name: Install python-mysqldb
+      apt: name=python-mysqldb state=present
+
+    - name: Install php5-mysql
+      apt: name=php5-mysql state=present
+
+    - name: Install libgd3
+      apt: name=libgd3 state=present
+
+    - name: Install php5-gd
+      apt: name=php5-gd state=present
+
+    - name: Install php5-mcrypt
+      apt: name=php5-mcrypt state=present
+
+    - name: Install php-db
+      apt: name=php-db state=present
+
+    - name: Install phpmyadmin
+      apt: name=phpmyadmin state=present
+    
+    - name: Restart apache
+      service: name=apache2 state=restarted
+
+    - name : Create DB admin user
+      mysql_user: name=prestashop password=prestashop1234 priv=*.*:ALL,GRANT state=present
+
+    - name : Setup DB
+      mysql_db: name=prestashop state=present
+
+    - name : Clean prestashop previous install 1
+      shell: if [ -e /var/www/html/prestashop ]; then rm -rf /var/www/html/prestashop*;fi
+
+    - name : Clean prestashop previous install 2
+      shell: if [ -e /var/www/html/Install_PrestaShop.html ]; then rm /var/www/html/Install_PrestaShop.html;fi
+
+    - name : Push prestashop
+      copy: src={{ prestashop_package }} dest=/var/www/html owner=root group=root mode=0644
+
+    - name : Unzip prestashop
+      shell: cd /var/www/html ; unzip -o /var/www/html/prestashop_1.6.0.14.zip
+
+    - name : Change write to www-data
+      shell: cd /var/www/html ; chown -R www-data prestashop ; chgrp -R www-data prestashop
+
+
