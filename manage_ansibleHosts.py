@@ -10,11 +10,10 @@ import pprint
 import argparse
 import os
 import ConfigParser
-import io
 
 # Variable needed
 
-confFile = "/home/sdi/ansible/ansibleHostsTEST"
+confFile = "/home/sdi/ansible/ansibleHosts"
 prog = sys.argv[0]
 
 if __name__ == '__main__':
@@ -43,6 +42,8 @@ if __name__ == '__main__':
         #config.add_section(arguments.group)
         config.set(arguments.group, arguments.hostname)
     
+    if (arguments.action == "remove"):
+        config.remove_option(arguments.group, arguments.hostname)
 
     with open(confFile, 'wb') as configfile:
         config.write(configfile)

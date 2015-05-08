@@ -1,0 +1,17 @@
+- name: Deploy cartridge with cmu
+  hosts: cmu
+  gather_facts: False
+  remote_user: root
+  
+  tasks:
+    - name : Deploy first available cartridge
+      shell: ~/deploy.sh | tee -a ~/deploy.log | grep "Deployed server"
+      register: deploy_output
+
+    - name : Register this server into ansible
+      shell: ~/ansible/manage_ansibleHosts.py add web "{{ deploy_output.stdout | regex_replace('Deployed server . (\w+) (\w+)', '\\2') }}"
+      delegate_to: localhost
+
+    - name : Register this server into CMDB
+      shell: ~/ansible/manage_3tiers_data.py add "{{ SubscriptionID }}" web "{{ deploy_output.stdout | regex_replace('Deployed server . (\w+) (\w+)', '\\2') }}"
+      delegate_to: localhost

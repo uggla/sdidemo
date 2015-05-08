@@ -45,11 +45,16 @@ if __name__ == '__main__':
     # Update variables according to args
 
     if (arguments.action == "add"):
-        datafile[arguments.uuid].append({arguments.type: arguments.ipaddress} )
+        if datafile.has_key(arguments.uuid):
+            datafile[arguments.uuid].append({arguments.type: arguments.ipaddress} )
+        else:
+            datafile[arguments.uuid]=[{arguments.type: arguments.ipaddress}]
 
     if (arguments.action == "remove"):
         item = datafile[arguments.uuid].index({arguments.type: arguments.ipaddress})
         del datafile[arguments.uuid][item]
+        if len(datafile[arguments.uuid])== 0:
+            del datafile[arguments.uuid]
 
 
     print json.dumps(datafile, indent=4, sort_keys=True)
