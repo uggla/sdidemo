@@ -23,8 +23,8 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser(version = prog + ' version 1.0')
     
     parser.add_argument('action', action='store',
-                        choices=['add','remove'],
-                    help='Action to do either add or remove storage')
+                        choices=['add','remove','get'],
+                    help='Action to do either add,remove or get data')
 
     parser.add_argument('uuid', action='store',
                     help='3 tiers uuid')
@@ -56,6 +56,11 @@ if __name__ == '__main__':
         if len(datafile[arguments.uuid])== 0:
             del datafile[arguments.uuid]
 
+    if (arguments.action == "get"):
+        for item in datafile[arguments.uuid]:
+            if item.has_key(arguments.type):
+                print item.get(arguments.type)
+                sys.exit(0)
 
     print json.dumps(datafile, indent=4, sort_keys=True)
     #sys.exit(0)
