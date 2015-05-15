@@ -1,0 +1,47 @@
+- name: Configure interface for haproxy
+  hosts: '{{ SubscriptionID }}'
+  gather_facts: False
+  remote_user: root
+
+  vars: 
+    - home_dir: "~"
+    - known_hosts_file: "{{ home_dir }}/.ssh/known_hosts"
+  
+  tasks:
+
+    - name: remove target host old servers identities from local known_hosts list
+      shell: ssh-keygen -R  {{ item }}
+      with_items:
+        - "{{ inventory_hostname }}"
+      delegate_to: localhost
+       
+    - name: get target host current fingerprint
+      shell: ssh-keyscan {{ hash_option | default("")}} {{ inventory_hostname }} >> {{ known_hosts_file }}
+      delegate_to: localhost
+  
+    - name : Add static route to 10.3.0.0/16
+      shell: ip route | grep "10.3.0.0/16" || ( ip route delete 10.3.8.0/24 && ip route add 10.3.0.0/16 dev eth0 )
+
+    - name : Set default route to client subnet
+      shell: ip route replace default via $(ip a show dev eth1 | grep "inet " | awk '{print $2}' | awk -F '/' '{print $1}' | sed 's/\s//g' | sed 's/\.[0-9]\+$/.1/')
+
+    - name : Get mac@
+      shell: ip addr show dev eth1 | grep "link/ether" | awk '{print $2}'
+      register: macaddress
+
+    - name : Get ip@
+      shell: ip addr show dev eth1 | grep "inet " | awk '{print $2}' | awk -F '/' '{print $1}'
+      register: ipaddress
+
+    - name : Get hostname
+      shell: hostname
+      register: hostname
+
+    - name : Output mac@
+      debug: msg="Mac address client[{{ inventory_hostname }}]={{ macaddress.stdout }}"
+
+    - name : Output ip@
+      debug: msg="ip address client[{{ inventory_hostname }}]={{ ipaddress.stdout }}"
+
+    - name : Output hostname@
+      debug: msg="hostname[{{ inventory_hostname }}]={{ hostname.stdout }}"

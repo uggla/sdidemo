@@ -1,0 +1,13 @@
+- name: Register a server
+  hosts: cmu
+  gather_facts: False
+  remote_user: root
+  
+  tasks:
+    - name : Unregister this server from ansible
+      shell: ~/ansible/manage_ansibleHosts.py remove haproxy-{{ SubscriptionID }} {{ mgmtipaddress }}
+      delegate_to: localhost
+
+    - name : Unregister this server from CMDB
+      shell: ~/ansible/manage_3tiers_data.py remove "{{ SubscriptionID }}" haproxy {{ mgmtipaddress }}
+      delegate_to: localhost
