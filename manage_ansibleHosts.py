@@ -39,7 +39,7 @@ if __name__ == '__main__':
     config.read(confFile)
     
     if (arguments.action == "add"):
-        #config.add_section(arguments.group)
+        config.add_section(arguments.group)
         config.set(arguments.group, arguments.hostname)
     
     if (arguments.action == "remove"):

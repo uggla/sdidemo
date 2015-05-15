@@ -1,5 +1,5 @@
 - name: Configure interface for web servers
-  hosts: web
+  hosts: '{{ SubscriptionID }}'
   gather_facts: False
   remote_user: root
 
@@ -47,5 +47,19 @@
       shell: ip addr show dev eth0.2251 | grep "link/ether" | awk '{print $2}'
       register: macaddress
 
+    - name : Get ip@
+      shell: ip addr show dev eth0.2251 | grep "inet " | awk '{print $2}' | awk -F '/' '{print $1}'
+      register: ipaddress
+
+    - name : Get hostname
+      shell: hostname
+      register: hostname
+
     - name : Output mac@
-      debug: msg="Mac address client={{ macaddress.stdout }}"
+      debug: msg="Mac address client[{{ inventory_hostname }}]={{ macaddress.stdout }}"
+
+    - name : Output ip@
+      debug: msg="ip address client[{{ inventory_hostname }}]={{ ipaddress.stdout }}"
+
+    - name : Output hostname@
+      debug: msg="hostname[{{ inventory_hostname }}]={{ hostname.stdout }}"

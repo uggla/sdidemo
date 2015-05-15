@@ -1,0 +1,13 @@
+- name: Register a server
+  hosts: cmu
+  gather_facts: False
+  remote_user: root
+  
+  tasks:
+    - name : Register this server into ansible
+      shell: ~/ansible/manage_ansibleHosts.py add haproxy-{{ SubscriptionID }} {{ mgmtipaddress }}
+      delegate_to: localhost
+
+    - name : Register this server into CMDB
+      shell: ~/ansible/manage_3tiers_data.py add "{{ SubscriptionID }}" haproxy {{ mgmtipaddress }}
+      delegate_to: localhost

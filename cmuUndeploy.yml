@@ -6,8 +6,8 @@
   vars: 
   
   tasks:
-    - name : Deploy first available cartridge
-      shell: ~/deploy.sh
+    - name : Undeploy cartridge
+      shell: ~/undeploy.sh {{ hostname }}
       register: deploy_output
 
     - name : Register this server into ansible
