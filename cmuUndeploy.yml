@@ -1,19 +1,21 @@
 - name: Undeploy cartridge with cmu
-  hosts: cmu
+  hosts: '{{ SubscriptionID }}'
   gather_facts: False
   remote_user: root
   
-  vars: 
-  
   tasks:
-    - name : Undeploy cartridge
-      shell: ~/undeploy.sh {{ hostname }}
-      register: deploy_output
+    - name : Get the hostname
+      shell: hostname
+      register: hostname
 
-    - name : Register this server into ansible
-      shell: ~/ansible/manage_ansibleHosts.py add web "{{ deploy_output.stdout | regex_replace('Deployed server . (\w+) (\w+)', '\\2') }}"
+    - name : Undeploy cartridge
+      shell: ~/undeploy.sh {{ hostname.stdout }}
+      delegate_to: cmu
+
+    - name : Unregister this server from ansible
+      shell: ~/ansible/manage_ansibleHosts.py remove {{ SubscriptionID }} {{ inventory_hostname }}
       delegate_to: localhost
 
-    - name : Unregister this server into CMDB
-      shell: ~/ansible/manage_3tiers_data.py add "{{ SubscriptionID }}" web "{{ deploy_output.stdout | regex_replace('Deployed server . (\w+) (\w+)', '\\2') }}"
+    - name : Unregister this server from CMDB
+      shell: ~/ansible/manage_3tiers_data.py remove "{{ SubscriptionID | regex_replace('web-','') }}" web {{ inventory_hostname }}
       delegate_to: localhost
