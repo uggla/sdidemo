@@ -38,7 +38,7 @@
       shell: dhclient eth0.{{ vlan }}
 
     - name : Add static route to 10.3.0.0/16
-      shell: ip route | grep "10.3.0.0/16" || ip route delete 10.3.8.0/24 && ip route add 10.3.0.0/16 dev eth0
+      shell: ip route | grep "10.3.0.0/16" || ( ip route delete 10.3.8.0/24 && ip route add 10.3.0.0/16 dev eth0 )
 
     - name : Set default route to client subnet
       shell: ip route replace default via $(ip a show dev eth0.{{ vlan }}  | grep "inet " | awk '{print $2}' | awk -F '/' '{print $1}' | sed 's/\s//g' | sed 's/\.[0-9]\+$/.1/')
