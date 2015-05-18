@@ -6,11 +6,8 @@
   vars: 
   
   tasks:
-    - name: Install haproxy
-      yum: name=haproxy state=present
-
     - name: Get web client ip
-      shell: ./manage_3tiers_data.py get {{ SubscriptionID  | regex_replace('haproxy-','') }} haproxy-client ip
+      shell: ./manage_3tiers_data.py get {{ SubscriptionID  | regex_replace('haproxy-','') }} web-client ip
       register: ip_webclient
       delegate_to: localhost
 

@@ -1,0 +1,18 @@
+- name: Configure Haproxy
+  hosts: "{{ SubscriptionID }}"
+  gather_facts: False
+  remote_user: root
+  
+  vars: 
+  
+  tasks:
+#    - name: Get web client ip
+#      shell: ./manage_3tiers_data.py get {{ SubscriptionID  | regex_replace('haproxy-','') }} haproxy-client ip
+#      register: ip_webclient
+#      delegate_to: localhost
+
+#    - name: Configure haproxy
+#      template: src=template/haproxy.cfg dest=/etc/haproxy/haproxy.cfg
+
+#    - name: Start haproxy
+#      service: name=haproxy state=started

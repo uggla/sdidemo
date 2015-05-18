@@ -1,0 +1,70 @@
+- name: Install webserver software
+  hosts: "{{ SubscriptionID }}"
+  gather_facts: False
+  remote_user: root
+  
+  vars: 
+  
+  tasks:
+    - name: Copy source list
+      copy: src=/etc/apt/sources.list dest=/etc/apt/sources.list owner=root group=root mode=0644
+
+    - name: Copy gpg keys for repositories
+      copy: src=/etc/apt/trusted.gpg dest=/etc/apt/trusted.gpg owner=root group=root mode=0644
+
+    - name: Update source to allow fr.archive.ubuntu.com
+      replace: dest=/etc/apt/sources.list regexp='10\.3\.8\.27' replace='fr.archive.ubuntu.com' backup=yes
+
+    - name: Update resolver
+      replace: dest=/etc/resolv.conf regexp='10\.3\.156\.23' replace='10.3.8.29'
+
+    - name: Install unzip
+      apt: name=unzip state=present update_cache=yes cache_valid_time=3600
+
+    - name: Install php
+      apt: name=php5 state=present
+
+    - name: Install mysql-server
+      apt: name=mysql-server-5.6 state=present
+
+    - name: Install mysql-client
+      apt: name=mysql-client-5.6 state=present
+    
+    - name: Install python-mysqldb
+      apt: name=python-mysqldb state=present
+
+    - name: Install php5-mysql
+      apt: name=php5-mysql state=present
+
+    - name: Install libgd3
+      apt: name=libgd3 state=present
+
+    - name: Install php5-gd
+      apt: name=php5-gd state=present
+
+    - name: Install php5-mcrypt
+      apt: name=php5-mcrypt state=present
+
+    - name: Install php-db
+      apt: name=php-db state=present
+
+    - name: Install phpmyadmin
+      apt: name=phpmyadmin state=present
+    
+    - name: Restart apache
+      service: name=apache2 state=restarted
+
+    - name : Create DB admin user
+      mysql_user: name=prestashop password=prestashop1234 priv=*.*:ALL,GRANT host='%' state=present
+
+    - name : Setup DB
+      mysql_db: name=prestashop state=present
+
+    - name : Allow DB to listen on 0.0.0.0
+      replace: dest=/etc/mysql/my.cnf regexp='bind-address\s+=\s+127\.0\.0\.1' replace='bind-address = 0.0.0.0' backup=yes
+
+    - name: Restart mysql
+      service: name=mysql state=restarted
+
+    - name: Allow phpmysql
+      shell: ln -s /usr/share/phpmyadmin /var/www/html/phpmyadmin
