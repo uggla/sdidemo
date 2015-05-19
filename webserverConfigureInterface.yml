@@ -58,6 +58,10 @@
     - name : Register this server into CMDB
       shell: ~/ansible/manage_3tiers_data.py add "{{ SubscriptionID | regex_replace('web-','') }}" web-client {{ ipaddress.stdout }}
       delegate_to: localhost
+    
+    - name : Put a flag
+      shell: touch {{ SubscriptionID | regex_replace('web-','') }}_web-client.flg
+      delegate_to: localhost
 
     - name : Output mac@
       debug: msg="Mac address client[{{ inventory_hostname }}]={{ macaddress.stdout }}"
