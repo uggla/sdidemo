@@ -6,6 +6,7 @@
   tasks:
     - name : Unregister this server from ansible
       shell: ~/ansible/manage_ansibleHosts.py remove {{ ServerType }}{{ ServerCount }}-{{ SubscriptionID }} {{ IPAddress }}
+      when : "{{ private }}" == "no"
       delegate_to: localhost
 
     - name : Unregister this server from CMDB
