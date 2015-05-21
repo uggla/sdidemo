@@ -43,6 +43,9 @@
       apt: name=php5-gd state=present
 
     - name: Install php5-mcrypt
+      apt: name=mcrypt state=present
+
+    - name: Install php5-mcrypt
       apt: name=php5-mcrypt state=present
 
     - name: Install php-db
