@@ -5,9 +5,9 @@
   
   tasks:
     - name : Register this server into ansible
-      shell: ~/ansible/manage_ansibleHosts.py add haproxy-{{ SubscriptionID }} {{ mgmtipaddress }}
+      shell: ~/ansible/manage_ansibleHosts.py add {{ ServerType }}{{ ServerCount }}-{{ SubscriptionID }} {{ IPAddress }}
       delegate_to: localhost
 
     - name : Register this server into CMDB
-      shell: ~/ansible/manage_3tiers_data.py add "{{ SubscriptionID }}" haproxy {{ mgmtipaddress }}
+      shell: ~/ansible/manage_3tiers_data.py add "{{ SubscriptionID }}" {{ ServerType }}{{ ServerCount }} {{ IPAddress }}
       delegate_to: localhost
