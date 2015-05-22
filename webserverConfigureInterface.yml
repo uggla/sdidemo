@@ -56,7 +56,7 @@
       register: hostname
 
     - name : Register this server into CMDB
-      shell: ~/ansible/manage_3tiers_data.py add "{{ SubscriptionID | regex_replace('web\d+-','') }}" web-client {{ ipaddress.stdout }}
+      shell: ~/ansible/manage_3tiers_data.py add "{{ SubscriptionID | regex_replace('web\d+-','') }}" web{{ ServerCount }}-client {{ ipaddress.stdout }}
       delegate_to: localhost
     
     - name : Output mac@

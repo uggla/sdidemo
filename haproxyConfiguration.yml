@@ -7,15 +7,19 @@
   
   tasks:
     - name: Get web client ip
-      shell: ./manage_3tiers_data.py get {{ SubscriptionID  | regex_replace('HAproxy1-','') }} web-client ip
+      shell: ./manage_3tiers_data.py get {{ SubscriptionID  | regex_replace('HAproxy1-','') }} web{{ ServerCount }}-client ip
       register: ip_webclient
       delegate_to: localhost
 
-    - name: Configure haproxy
+    - name: Configure haproxy deploy configuration file template
       template: src=templates/haproxy.cfg dest=/etc/haproxy/haproxy.cfg
+      when: ServerCount == "1"
+
+    - name: Configure haproxy add line to conf file
+      lineinfile: dest=/etc/haproxy/haproxy.cfg line="    server  web{{ ServerCount }} {{ ip_webclient.stdout }}:80 check" insertafter="    balance     roundrobin"
 
     - name: Start haproxy
-      service: name=haproxy state=started
+      service: name=haproxy state=restarted
 
     - name: Open firewall
       lineinfile: dest=/etc/sysconfig/iptables regexp="--dport 5000 -j ACCEPT" line="-A INPUT -m state --state NEW -m tcp -p tcp --dport 5000 -j ACCEPT" insertbefore="-A INPUT -m state --state NEW -m tcp -p tcp --dport 22 -j ACCEPT"
