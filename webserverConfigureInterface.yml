@@ -44,11 +44,11 @@
 #      shell: ip route replace default via $(ip a show dev eth0.{{ vlan }}  | grep "inet " | awk '{print $2}' | awk -F '/' '{print $1}' | sed 's/\s//g' | sed 's/\.[0-9]\+$/.1/')
 
     - name : Get mac@
-      shell: ip addr show dev eth0.2251 | grep "link/ether" | awk '{print $2}'
+      shell: ip addr show dev eth0.{{ vlan }} | grep "link/ether" | awk '{print $2}'
       register: macaddress
 
     - name : Get ip@
-      shell: ip addr show dev eth0.2251 | grep "inet " | awk '{print $2}' | awk -F '/' '{print $1}'
+      shell: ip addr show dev eth0.{{ vlan }} | grep "inet " | awk '{print $2}' | awk -F '/' '{print $1}'
       register: ipaddress
 
     - name : Get hostname
