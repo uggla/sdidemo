@@ -1,0 +1,26 @@
+- name: Register a server
+  hosts: cmu
+  gather_facts: False
+  remote_user: root
+ 
+  vars:
+
+  tasks:
+
+    - name: Probe backend network subnet
+      shell: nmap -sP 192.168.{{ item }}.0/24
+      delegate_to: localhost
+      with_items:
+        - 21
+        - 22
+        - 23
+
+    - name: Get IP from mac
+      shell: arp -an | grep -i {{ macaddressclient }} | awk -F '(' '{ print $2 }' | awk -F ')' '{ print $1 }'
+      delegate_to: localhost
+      register: ipaddressClient
+
+
+    - name : Output ipaddress
+      debug: msg="ipaddressClient = {{ ipaddressClient.stdout }}"
+      delegate_to: localhost
