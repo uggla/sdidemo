@@ -1,4 +1,4 @@
-- name: Configure Haproxy
+- name: Configure webserver
   hosts: "{{ SubscriptionID }}"
   gather_facts: False
   remote_user: root
