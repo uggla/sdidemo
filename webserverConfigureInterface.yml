@@ -37,8 +37,8 @@
     - name : Get ip via dhcp
       shell: dhclient eth0.{{ vlan }}
 
-    - name : Add static route to 10.3.0.0/16
-      shell: ip route | grep "10.3.0.0/16" || ( ip route delete 10.3.8.0/24 && ip route add 10.3.0.0/16 dev eth0 )
+#    - name : Add static route to 10.3.0.0/16
+#      shell: ip route | grep "10.3.0.0/16" || ( ip route delete 10.3.8.0/24 && ip route add 10.3.0.0/16 dev eth0 )
 
 #    - name : Set default route to client subnet
 #      shell: ip route replace default via $(ip a show dev eth0.{{ vlan }}  | grep "inet " | awk '{print $2}' | awk -F '/' '{print $1}' | sed 's/\s//g' | sed 's/\.[0-9]\+$/.1/')
@@ -50,6 +50,9 @@
     - name : Get ip@
       shell: ip addr show dev eth0.{{ vlan }} | grep "inet " | awk '{print $2}' | awk -F '/' '{print $1}'
       register: ipaddress
+    
+    - name : Add static route to 192.168.0.0
+      shell: ip route add 192.168.0.0/16 via {{ ipaddress.stdout | regex_replace('(192.168.\d+).\d+','\\1.1') }}
 
     - name : Get hostname
       shell: hostname
