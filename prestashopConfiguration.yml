@@ -10,18 +10,35 @@
       shell: ./manage_3tiers_data.py get {{ SubscriptionID  | regex_replace('web1-','') }} database1-client ip
       register: ip_dbclient
       delegate_to: localhost
+
+    - name: Get db mgmt ip
+      shell: ./manage_3tiers_data.py get {{ SubscriptionID  | regex_replace('web1-','') }} database1 ip
+      register: ip_dbmgmt
+      delegate_to: localhost
  
     - name: Update settings.conf
       replace: dest=/var/www/html/prestashop/config/settings.inc.php regexp='192.168.23.103' replace='{{ ip_dbclient.stdout }}' backup=yes
 
+    - name: Cleanup prestashop cache
+      shell: rm -rf /var/www/html/prestashop/cache/smarty/cache
 
+    - name: Copy dump_ref.sql
+      shell: cp -f packages/dump_ref.sql packages/dump.sql
+      delegate_to: localhost
 
-#    - name: Copy dump to /tmp
-#      copy: src=packages/dump.sql dest=/tmp/dump.sql owner=root group=root mode=0644
-#    
-#    - name: Import DB dump
-#      mysql_db: name=prestashop state=import target=/tmp/dump.sql
-#
-#    - name: Restart mysql
-#      service: name=mysqld state=restarted
-#
+    - name: Patch dump with ip
+      replace: dest=packages/dump.sql regexp='192.168.13.136' replace='{{ ipaddressclient }}'
+      delegate_to: localhost
+
+    - name: Copy dump to /tmp
+      copy: src=packages/dump.sql dest=/tmp/dump.sql owner=root group=root mode=0644
+      delegate_to: "{{ ip_dbmgmt.stdout }}"
+    
+    - name: Import DB dump
+      mysql_db: name=prestashop state=import target=/tmp/dump.sql
+      delegate_to: "{{ ip_dbmgmt.stdout }}"
+
+    - name: Restart mysql
+      service: name=mysqld state=restarted
+      delegate_to: "{{ ip_dbmgmt.stdout }}"
+
