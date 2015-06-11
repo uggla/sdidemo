@@ -1,0 +1,13 @@
+- name: Shutdown database server
+  hosts: '{{ SubscriptionID }}'
+  gather_facts: False
+  remote_user: root
+
+  vars: 
+    - home_dir: "~"
+    - known_hosts_file: "{{ home_dir }}/.ssh/known_hosts"
+  
+  tasks:
+
+    - name : Clean shutdown of server
+      shell: shutdown -h 0

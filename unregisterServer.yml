@@ -6,9 +6,12 @@
   tasks:
     - name : Unregister this server from ansible
       shell: ~/ansible/manage_ansibleHosts.py remove {{ ServerType }}{{ ServerCount }}-{{ SubscriptionID }} {{ IPAddress }}
-      when : "{{ private }}" == "no"
       delegate_to: localhost
 
-    - name : Unregister this server from CMDB
+    - name : Unregister this server mgmt IP from CMDB
       shell: ~/ansible/manage_3tiers_data.py remove "{{ SubscriptionID }}" {{ ServerType }}{{ ServerCount }} {{ IPAddress }}
+      delegate_to: localhost
+
+    - name : Unregister this server client IP from CMDB
+      shell: ~/ansible/manage_3tiers_data.py remove "{{ SubscriptionID }}" {{ ServerType }}{{ ServerCount }}-client {{ ipaddressclient }}
       delegate_to: localhost
