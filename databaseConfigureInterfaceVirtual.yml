@@ -1,0 +1,28 @@
+- name: Configure interface for db virtual servers
+  hosts: '{{ SubscriptionID }}'
+  gather_facts: False
+  remote_user: root
+
+  vars: 
+    - home_dir: "~"
+    - known_hosts_file: "{{ home_dir }}/.ssh/known_hosts"
+  
+  tasks:
+
+    - name: remove target host old servers identities from local known_hosts list
+      shell: ssh-keygen -R  {{ item }}
+      with_items:
+        - "{{ inventory_hostname }}"
+      delegate_to: localhost
+       
+    - name: get target host current fingerprint
+      shell: ssh-keyscan {{ hash_option | default("")}} {{ inventory_hostname }} >> {{ known_hosts_file }}
+      delegate_to: localhost
+  
+    - name : Add static route to 192.168.0.0
+      shell: ip route add 192.168.0.0/16 via {{ ipaddressclient | regex_replace('(192.168.\d+).\d+','\\1.1') }}
+
+    - name : Register this server clinet IP into CMDB
+      shell: ~/ansible/manage_3tiers_data.py add "{{ SubscriptionID }}" database1-client {{ ipaddressClient.stdout }}
+      delegate_to: localhost
+
