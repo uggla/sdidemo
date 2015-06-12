@@ -7,12 +7,12 @@
   
   tasks:
     - name: Get db client ip
-      shell: ./manage_3tiers_data.py get {{ SubscriptionID  | regex_replace('web1-','') }} database1-client ip
+      shell: ./manage_3tiers_data.py get {{ SubscriptionID  | regex_replace('web.-','') }} database1-client ip
       register: ip_dbclient
       delegate_to: localhost
 
     - name: Get db mgmt ip
-      shell: ./manage_3tiers_data.py get {{ SubscriptionID  | regex_replace('web1-','') }} database1 ip
+      shell: ./manage_3tiers_data.py get {{ SubscriptionID  | regex_replace('web.-','') }} database1 ip
       register: ip_dbmgmt
       delegate_to: localhost
  
@@ -33,6 +33,15 @@
     - name: Copy dump to /tmp
       copy: src=packages/dump.sql dest=/tmp/dump.sql owner=root group=root mode=0644
       delegate_to: "{{ ip_dbmgmt.stdout }}"
+
+    - name: Remove previous db if already exist
+      mysql_db: name=prestashop state=absent
+      delegate_to: "{{ ip_dbmgmt.stdout }}"
+      
+    - name: Setup DB
+      mysql_db: name=prestashop state=present
+      delegate_to: "{{ ip_dbmgmt.stdout }}"
+
     
     - name: Import DB dump
       mysql_db: name=prestashop state=import target=/tmp/dump.sql

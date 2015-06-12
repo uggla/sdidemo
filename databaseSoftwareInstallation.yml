@@ -73,11 +73,11 @@
     - name: Create DB admin user local
       mysql_user: name=prestashop password=prestashop1234 priv=*.*:ALL,GRANT host='localhost' state=present
 
-    - name: Remove previous db if already exist
-      mysql_db: name=prestashop state=absent
-      
-    - name: Setup DB
-      mysql_db: name=prestashop state=present
+#    - name: Remove previous db if already exist
+#      mysql_db: name=prestashop state=absent
+#      
+#    - name: Setup DB
+#      mysql_db: name=prestashop state=present
 
 #    - name: Copy dump to /tmp
 #      copy: src=packages/dump.sql dest=/tmp/dump.sql owner=root group=root mode=0644
