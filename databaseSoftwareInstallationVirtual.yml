@@ -75,11 +75,17 @@
     - name: Restart mysql
       service: name=mysqld state=restarted
 
-    - name: Create DB admin user remote
+    - name: Create prestashop DB admin user remote
       mysql_user: name=prestashop password=prestashop1234 priv=*.*:ALL,GRANT host='%' state=present
 
-    - name: Create DB admin user local
+    - name: Create prestashop DB admin user local
       mysql_user: name=prestashop password=prestashop1234 priv=*.*:ALL,GRANT host='localhost' state=present
+
+    - name: Create wordpress DB admin user remote
+      mysql_user: name=wordpress password=wordpress1234 priv=*.*:ALL,GRANT host='%' state=present
+
+    - name: Create wordpress DB admin user local
+      mysql_user: name=wordpress password=wordpress1234 priv=*.*:ALL,GRANT host='localhost' state=present
 
     - name: Allow phpmysql
       shell: ln -s /usr/share/phpmyadmin /var/www/html/phpmyadmin

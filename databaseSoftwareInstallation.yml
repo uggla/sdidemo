@@ -73,6 +73,12 @@
     - name: Create DB admin user local
       mysql_user: name=prestashop password=prestashop1234 priv=*.*:ALL,GRANT host='localhost' state=present
 
+    - name: Create wordpress DB admin user remote
+      mysql_user: name=wordpress password=wordpress1234 priv=*.*:ALL,GRANT host='%' state=present
+
+    - name: Create wordpress DB admin user local
+      mysql_user: name=wordpress password=wordpress1234 priv=*.*:ALL,GRANT host='localhost' state=present
+
 #    - name: Remove previous db if already exist
 #      mysql_db: name=prestashop state=absent
 #      

@@ -17,14 +17,14 @@
       delegate_to: localhost
  
     - name: Update settings.conf
-      replace: dest=/var/www/html/prestashop/config/settings.inc.php regexp='192.168.23.103' replace='{{ ip_dbclient.stdout }}' backup=yes
+      replace: dest=/var/www/html/wordpress/wp-config.php regexp='192.168.23.109' replace='{{ ip_dbclient.stdout }}' backup=yes
 
     - name: Copy dump_ref.sql
-      shell: cp -f packages/dumpwordpress_ref.sql packages/dump.sql
+      shell: cp -f packages/dump_wordpress_ref.sql packages/dump.sql
       delegate_to: localhost
 
     - name: Patch dump with ip
-      replace: dest=packages/dump.sql regexp='192.168.13.136' replace='{{ ipaddressclient }}'
+      replace: dest=packages/dump.sql regexp='192.168.13.145' replace='{{ ipaddressclient }}'
       delegate_to: localhost
 
     - name: Copy dump to /tmp
