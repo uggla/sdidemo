@@ -1,0 +1,50 @@
+- name: Configure wordpress
+  hosts: "{{ SubscriptionID }}"
+  gather_facts: False
+  remote_user: root
+  
+  vars: 
+  
+  tasks:
+    - name: Get db client ip
+      shell: ./manage_3tiers_data.py get {{ SubscriptionID  | regex_replace('web.-','') }} database1-client ip
+      register: ip_dbclient
+      delegate_to: localhost
+
+    - name: Get db mgmt ip
+      shell: ./manage_3tiers_data.py get {{ SubscriptionID  | regex_replace('web.-','') }} database1 ip
+      register: ip_dbmgmt
+      delegate_to: localhost
+ 
+    - name: Update settings.conf
+      replace: dest=/var/www/html/prestashop/config/settings.inc.php regexp='192.168.23.103' replace='{{ ip_dbclient.stdout }}' backup=yes
+
+    - name: Copy dump_ref.sql
+      shell: cp -f packages/dumpwordpress_ref.sql packages/dump.sql
+      delegate_to: localhost
+
+    - name: Patch dump with ip
+      replace: dest=packages/dump.sql regexp='192.168.13.136' replace='{{ ipaddressclient }}'
+      delegate_to: localhost
+
+    - name: Copy dump to /tmp
+      copy: src=packages/dump.sql dest=/tmp/dump.sql owner=root group=root mode=0644
+      delegate_to: "{{ ip_dbmgmt.stdout }}"
+
+    - name: Remove previous db if already exist
+      mysql_db: name=wordpress state=absent
+      delegate_to: "{{ ip_dbmgmt.stdout }}"
+      
+    - name: Setup DB
+      mysql_db: name=wordpress state=present
+      delegate_to: "{{ ip_dbmgmt.stdout }}"
+
+    
+    - name: Import DB dump
+      mysql_db: name=wordpress state=import target=/tmp/dump.sql
+      delegate_to: "{{ ip_dbmgmt.stdout }}"
+
+    - name: Restart mysql
+      service: name=mysqld state=restarted
+      delegate_to: "{{ ip_dbmgmt.stdout }}"
+
