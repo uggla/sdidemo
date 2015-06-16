@@ -47,4 +47,3 @@
     - name: Restart mysql
       service: name=mysqld state=restarted
       delegate_to: "{{ ip_dbmgmt.stdout }}"
-

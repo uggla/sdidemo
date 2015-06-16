@@ -47,9 +47,19 @@
 
     - name: Copy prestashop
       copy: src=packages/prestashop_installed.tar.gz dest=/var/www/html owner=root group=root mode=0644
+      when: application  == "prestashop"
 
     - name: Extract prestashop
       shell: cd /var/www/html && tar zxf /var/www/html/prestashop_installed.tar.gz 
+      when: application == "prestashop"
+
+    - name: Copy wordpress
+      copy: src=packages/wordpress_installed.tar.gz dest=/var/www/html owner=root group=root mode=0644
+      when: application == "wordpress"
+
+    - name: Extract wordpress
+      shell: cd /var/www/html && tar zxf /var/www/html/wordpress_installed.tar.gz 
+      when: application == "wordpress"
 
     - name: Restart apache
       service: name=apache2 state=restarted
