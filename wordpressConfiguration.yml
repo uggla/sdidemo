@@ -32,13 +32,16 @@
       delegate_to: "{{ ip_dbmgmt.stdout }}"
 
     - name: Remove previous db if already exist
+      mysql_db: name=prestashop state=absent
+      delegate_to: "{{ ip_dbmgmt.stdout }}"
+
+    - name: Remove previous db if already exist
       mysql_db: name=wordpress state=absent
       delegate_to: "{{ ip_dbmgmt.stdout }}"
       
     - name: Setup DB
       mysql_db: name=wordpress state=present
       delegate_to: "{{ ip_dbmgmt.stdout }}"
-
     
     - name: Import DB dump
       mysql_db: name=wordpress state=import target=/tmp/dump.sql

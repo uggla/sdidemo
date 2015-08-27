@@ -35,6 +35,10 @@
       delegate_to: "{{ ip_dbmgmt.stdout }}"
 
     - name: Remove previous db if already exist
+      mysql_db: name=wordpress state=absent
+      delegate_to: "{{ ip_dbmgmt.stdout }}"
+
+    - name: Remove previous db if already exist
       mysql_db: name=prestashop state=absent
       delegate_to: "{{ ip_dbmgmt.stdout }}"
       
