@@ -10,14 +10,25 @@ import json
 import pprint
 import argparse
 import os
+import subprocess
 
 
 # Variable needed
 
-confFile = "/home/sdi/ansible/datafile.json"
+confFile = '/home/sdi/ansible/essai/datafile.json'
 prog = sys.argv[0]
 
 if __name__ == '__main__':
+
+    def get_hostname(ip):
+        cmd = "ssh root@" + ip + " hostname"
+	try:
+            output = subprocess.check_output(cmd.split())
+        except subprocess.CalledProcessError, e:
+            return ""
+        return output
+
+
     pp = pprint.PrettyPrinter(indent=4)
 
     parser = argparse.ArgumentParser(version = prog + ' version 1.0')
@@ -44,23 +55,27 @@ if __name__ == '__main__':
 
     # Update variables according to args
 
-    if (arguments.action == "add"):
-        if datafile.has_key(arguments.uuid):
-            datafile[arguments.uuid].append({arguments.type: arguments.ipaddress} )
+    if (arguments.action == 'add'):
+        if arguments.uuid not in datafile:
+            datafile[arguments.uuid] = {arguments.type: arguments.ipaddress}
         else:
-            datafile[arguments.uuid]=[{arguments.type: arguments.ipaddress}]
+            datafile[arguments.uuid][arguments.type] = arguments.ipaddress
+    datafile[arguments.uuid][arguments.type + "-hostname"] = get_hostname(arguments.ipaddress).strip()
+    
 
-    if (arguments.action == "remove"):
-        item = datafile[arguments.uuid].index({arguments.type: arguments.ipaddress})
-        del datafile[arguments.uuid][item]
+    if (arguments.action == 'remove'):
+        del datafile[arguments.uuid][arguments.type]
+        del datafile[arguments.uuid][arguments.type + "-hostname"]
         if len(datafile[arguments.uuid])== 0:
             del datafile[arguments.uuid]
 
-    if (arguments.action == "get"):
-        for item in datafile[arguments.uuid]:
-            if item.has_key(arguments.type):
-                print item.get(arguments.type)
-                sys.exit(0)
+    if (arguments.action == 'get'):
+        if arguments.type in datafile[arguments.uuid]:
+            print datafile[arguments.uuid][arguments.type]
+            sys.exit(0)
+    	else:
+            print 'Key not found'
+            sys.exit(1)
 
     print json.dumps(datafile, indent=4, sort_keys=True)
     #sys.exit(0)
