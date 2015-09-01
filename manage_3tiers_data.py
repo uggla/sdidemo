@@ -15,7 +15,7 @@ import subprocess
 
 # Variable needed
 
-confFile = '/home/sdi/ansible/essai/datafile.json'
+confFile = '/home/sdi/ansible/datafile.json'
 prog = sys.argv[0]
 
 if __name__ == '__main__':
