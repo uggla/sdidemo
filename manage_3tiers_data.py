@@ -11,6 +11,7 @@ import pprint
 import argparse
 import os
 import subprocess
+import datetime
 
 
 # Variable needed
@@ -21,7 +22,7 @@ prog = sys.argv[0]
 if __name__ == '__main__':
 
     def get_hostname(ip):
-        cmd = "ssh root@" + ip + " hostname"
+        cmd = "ssh -o StrictHostKeyChecking=no root@" + ip + " hostname"
 	try:
             output = subprocess.check_output(cmd.split())
         except subprocess.CalledProcessError, e:
@@ -61,6 +62,8 @@ if __name__ == '__main__':
         else:
             datafile[arguments.uuid][arguments.type] = arguments.ipaddress
     datafile[arguments.uuid][arguments.type + "-hostname"] = get_hostname(arguments.ipaddress).strip()
+    lastupdate = datetime.datetime.now()
+    datafile[arguments.uuid]["lastupdate"] = lastupdate.strftime('%Y-%m-%d %H:%M:%S')
     
 
     if (arguments.action == 'remove'):
