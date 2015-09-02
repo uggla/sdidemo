@@ -69,7 +69,8 @@ if __name__ == '__main__':
     if (arguments.action == 'remove'):
         del datafile[arguments.uuid][arguments.type]
         del datafile[arguments.uuid][arguments.type + "-hostname"]
-        if len(datafile[arguments.uuid])== 0:
+        if len(datafile[arguments.uuid])== 1:
+            del datafile[arguments.uuid]["lastupdate"]
             del datafile[arguments.uuid]
 
     if (arguments.action == 'get'):
