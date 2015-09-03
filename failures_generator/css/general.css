@@ -18,6 +18,10 @@ a img {
 	border:none;
 }
 
+.deploy {
+	margin-bottom: 15px;
+}
+
 a.server:hover {
 	cursor: pointer;
 }

@@ -44,6 +44,9 @@ foreach($data as $service){
 			if(isset($service[$hostkey])){
 				$web_servers[$value]["hostname"] = $service[$hostkey];
 				$web_servers[$value]["lastupdate"] = $service["lastupdate"];
+				$pubip = explode('-',$key);
+				$pubip = $pubip[0];
+				$web_servers[$value]["pubip"] = $service[$pubip];
 				}
 			else{
 				$web_servers[$value] = "";
@@ -56,8 +59,8 @@ foreach($data as $service){
 #print var_dump($web_servers);
 # Now print the data
 foreach($web_servers as $ip => $values){
-	printf("<h2>Server : %s (%s)</h2>\n", $ip, $values["hostname"]);
-        printf("Deployed : %s\n", $values["lastupdate"]);
+	printf("<h2>Server : %s / %s (%s)</h2>\n", $ip, $values["pubip"], $values["hostname"]);
+        printf("<div class=\"deploy\">Deployed : %s</div>\n", $values["lastupdate"]);
 	printf("<img src=\"images/moonshot.png\" style=\"width:150px\">\n");
 	printf("<br/>\n");
 	printf("<br/>\n");
