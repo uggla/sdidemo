@@ -62,13 +62,13 @@ if __name__ == '__main__':
             datafile[arguments.uuid] = {arguments.type: arguments.ipaddress}
         else:
             datafile[arguments.uuid][arguments.type] = arguments.ipaddress
-    if 'client' in arguments.type:
-        pubip = datafile[arguments.uuid][re.sub(r'-client.*', '', arguments.type)]
-        datafile[arguments.uuid][arguments.type + "-hostname"] = get_hostname(pubip).strip()
-    else:
-        datafile[arguments.uuid][arguments.type + "-hostname"] = get_hostname(arguments.ipaddress).strip()
-    lastupdate = datetime.datetime.now()
-    datafile[arguments.uuid]["lastupdate"] = lastupdate.strftime('%Y-%m-%d %H:%M:%S')
+	    if 'client' in arguments.type:
+		pubip = datafile[arguments.uuid][re.sub(r'-client.*', '', arguments.type)]
+		datafile[arguments.uuid][arguments.type + "-hostname"] = get_hostname(pubip).strip()
+	    else:
+		datafile[arguments.uuid][arguments.type + "-hostname"] = get_hostname(arguments.ipaddress).strip()
+	lastupdate = datetime.datetime.now()
+	datafile[arguments.uuid]["lastupdate"] = lastupdate.strftime('%Y-%m-%d %H:%M:%S')
     
 
     if (arguments.action == 'remove'):
