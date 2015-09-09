@@ -12,6 +12,7 @@ import argparse
 import os
 import subprocess
 import datetime
+import re
 
 
 # Variable needed
@@ -22,7 +23,7 @@ prog = sys.argv[0]
 if __name__ == '__main__':
 
     def get_hostname(ip):
-        cmd = "ssh -o StrictHostKeyChecking=no root@" + ip + " hostname"
+        cmd = "ssh -i /home/sdi/.ssh/id_rsa -o StrictHostKeyChecking=no root@" + ip + " hostname"
 	try:
             output = subprocess.check_output(cmd.split())
         except subprocess.CalledProcessError, e:
@@ -61,7 +62,11 @@ if __name__ == '__main__':
             datafile[arguments.uuid] = {arguments.type: arguments.ipaddress}
         else:
             datafile[arguments.uuid][arguments.type] = arguments.ipaddress
-    datafile[arguments.uuid][arguments.type + "-hostname"] = get_hostname(arguments.ipaddress).strip()
+    if 'client' in arguments.type:
+        pubip = datafile[arguments.uuid][re.sub(r'-client.*', '', arguments.type)]
+        datafile[arguments.uuid][arguments.type + "-hostname"] = get_hostname(pubip).strip()
+    else:
+        datafile[arguments.uuid][arguments.type + "-hostname"] = get_hostname(arguments.ipaddress).strip()
     lastupdate = datetime.datetime.now()
     datafile[arguments.uuid]["lastupdate"] = lastupdate.strftime('%Y-%m-%d %H:%M:%S')
     
