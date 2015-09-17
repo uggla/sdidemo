@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="images/favicon.ico">
+
+    <title>Demo Portal</title>
+
+    <!-- Bootstrap core CSS -->
+    <!--<link href="css/bootstrap.css" rel="stylesheet">-->
+	<link href="css/cosmo.bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="css/demoportal.css" rel="stylesheet">
+
+    <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
+    <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
+    <script src="js/ie-emulation-modes-warning.js"></script>
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+  </head>
+
+  <style>
+ .link {
+  stroke: #999;
+  stroke-opacity: .6;
+}
+
+  </style>
+
+  <body>
+
+
+    <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+
+		<img class="navbar-brand navbar-brand-img" alt="HP" src="images/hpwhite.png"/>
+
+		  <div class="navbar-brand">
+		  Demo Portal
+		  </div>
+
+	  <div class="container">
+
+		<div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target=".navbar-collapse">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+
+			<!--<img class="navbar-brand navbar-brand-img" alt="HP" src="images/hpwhite.png"/>
+
+		  <div class="navbar-brand">
+		  Cluster UI
+		  </div>-->
+
+        </div>
+
+		<div class="collapse navbar-collapse">
+          <ul id="tabsNavBar" class="nav navbar-nav">
+            <li id="clusterTabButton" class="navbar-nav-li active"><a target="_blank" href="#dycl" data-toggle="tab">Home</a></li>
+			<!--<li class="navbar-nav-li"><a target="_blank" href="#docs" data-toggle="tab">Documents</a></li>-->
+          </ul>
+       <!-- </div>
+        <div class="navbar-collapse collapse">-->
+			<!--<form class="navbar-form navbar-right" role="form">
+				<div class="form-group">
+					<input id="host" placeholder="Hostname" class="form-control" type="text">
+				</div>
+				<div class="form-group">
+					<input id="port" placeholder="Port" class="form-control" type="text">
+				</div>
+			</form>-->
+        </div><!--/.navbar-collapse -->
+      </div>
+    </div>
+
+
+    <div class="container">
+        <div class="row col-xs-12">
+            <h2>Demo 01 - Twitter Exploration</h2>
+            <hr>
+       </div>
+        <div class="row">
+            <div class="col-lg-6">
+                            <div class="thumbnail right-caption span4">
+                               <div class="img-block"><img src="./img/01a-1-History.png" alt=""></div>
+                              <div class="caption">
+                                <h5>Tweets history</h5>
+                                                <p class="desc">An historical view of tweets collected each day in the platform</p>
+                                <p><a target="_blank" href="http://10.3.220.50/views/HavenLiveDemos-01a-GlobalTweets/1-History?:embed=y" class="btn btn-primary">Demo</a>
+<a target="_blank" href="http://10.3.220.51/views/HavenLiveDemos-01a-GlobalTweets/1-History?:embed=y" class="btn">Backup link</a> </p>
+                              </div>
+                            </div>
+                            </div><div class="col-lg-6">
+                            <div class="thumbnail right-caption span4">
+                               <div class="img-block"><img src="./img/01a-2-CountLang.png" alt=""></div>
+                              <div class="caption">
+                                <h5>Tweets & Languages</h5>
+                                                <p class="desc">Current number of tweets and languages stored in the platform</p>
+                                <p><a target="_blank" href="http://10.3.220.50/views/HavenLiveDemos-01a-GlobalTweets/2-CountLang?:embed=y" class="btn btn-primary">Demo</a>
+<a target="_blank" href="http://10.3.220.51/views/HavenLiveDemos-01a-GlobalTweets/2-CountLang?:embed=y" class="btn">Backup link</a> </p>
+                              </div>
+                            </div>
+                            </div><div class="col-lg-6">
+                            <div class="thumbnail right-caption span4">
+                               <div class="img-block"><img src="./img/01a-3-Last10minutes.png" alt=""></div>
+                              <div class="caption">
+                                <h5>Last 10 minutes</h5>
+                                                <p class="desc">Tweets collected during the last minutes with sentiment analysis</p>
+                                <p><a target="_blank" href="http://10.3.220.50/views/HavenLiveDemos-01a-GlobalTweets/3-Last10minutes?:embed=y" class="btn btn-primary">Demo</a>
+<a target="_blank" href="http://10.3.220.51/views/HavenLiveDemos-01a-GlobalTweets/3-Last10minutes?:embed=y" class="btn">Backup link</a> </p>
+                              </div>
+                            </div>
+                            </div><div class="col-lg-6">
+                            <div class="thumbnail right-caption span4">
+                               <div class="img-block"><img src="./img/01a-4-GeoMap.png" alt=""></div>
+                              <div class="caption">
+                                <h5>Tweets Geo map</h5>
+                                                <p class="desc">Positioning geotagged tweets on a world map</p>
+                                <p><a target="_blank" href="http://10.3.220.50/views/HavenLiveDemos-01a-GlobalTweets/4-GeoMap?:embed=y" class="btn btn-primary">Demo</a>
+<a target="_blank" href="http://10.3.220.51/views/HavenLiveDemos-01a-GlobalTweets/4-GeoMap?:embed=y" class="btn">Backup link</a> </p>
+                              </div>
+                            </div>
+                            </div><div class="col-lg-6">
+                            <div class="thumbnail right-caption span4">
+                               <div class="img-block"><img src="./img/01a-5-InfluencersWordMap.png" alt=""></div>
+                              <div class="caption">
+                                <h5>Influencers Wordmap</h5>
+                                                <p class="desc">Influencers per number of tweets for a fixed period of time</p>
+                                <p><a target="_blank" href="http://10.3.220.50/views/HavenLiveDemos-01a-GlobalTweets/5-InfluencersWordMap?:embed=y" class="btn btn-primary">Demo</a>
+<a target="_blank" href="http://10.3.220.51/views/HavenLiveDemos-01a-GlobalTweets/5-InfluencersWordMap?:embed=y" class="btn">Backup link</a> </p>
+                              </div>
+                            </div>
+                            </div><div class="col-lg-6">
+                            <div class="thumbnail right-caption span4">
+                               <div class="img-block"><img src="./img/01a-6-InfluencersBubbles.png" alt=""></div>
+                              <div class="caption">
+                                <h5>Influencers per day</h5>
+                                                <p class="desc">View of influencers per day</p>
+                                <p><a target="_blank" href="http://10.3.220.50/views/HavenLiveDemos-01a-GlobalTweets/6-InfluencersBubbles?:embed=y" class="btn btn-primary">Demo</a>
+<a target="_blank" href="http://10.3.220.51/views/HavenLiveDemos-01a-GlobalTweets/6-InfluencersBubbles?:embed=y" class="btn">Backup link</a> </p>
+                              </div>
+                            </div>
+                            </div><div class="col-lg-6">
+                            <div class="thumbnail right-caption span4">
+                               <div class="img-block"><img src="./img/01a-7-InfluencersPerSentiment.png" alt=""></div>
+                              <div class="caption">
+                                <h5>Influencers dashboard</h5>
+                                                <p class="desc">Positioning the influencers by number of tweets & sentiment</p>
+                                <p><a target="_blank" href="http://10.3.220.50/views/HavenLiveDemos-01a-GlobalTweets/7-InfluencersPerSentiment?:embed=y" class="btn btn-primary">Demo</a>
+<a target="_blank" href="http://10.3.220.51/views/HavenLiveDemos-01a-GlobalTweets/7-InfluencersPerSentiment?:embed=y" class="btn">Backup link</a> </p>
+                              </div>
+                            </div>
+                            </div><div class="col-lg-6">
+                            <div class="thumbnail right-caption span4">
+                               <div class="img-block"><img src="./img/01b-1-HashtagsWordsMap.png" alt=""></div>
+                              <div class="caption">
+                                <h5>Hashtag Wordmap</h5>
+                                                <p class="desc">A view of hashtags at a given moment of time</p>
+                                <p><a target="_blank" href="http://10.3.220.50/views/HavenLiveDemos-01b-Hashtags/1-HashtagsWordsMap?:embed=y" class="btn btn-primary">Demo</a>
+<a target="_blank" href="http://10.3.220.51/views/HavenLiveDemos-01b-Hashtags/1-HashtagsWordsMap?:embed=y" class="btn">Backup link</a> </p>
+                              </div>
+                            </div>
+                            </div><div class="col-lg-6">
+                            <div class="thumbnail right-caption span4">
+                               <div class="img-block"><img src="./img/01b-2-BubblesPerDay.png" alt=""></div>
+                              <div class="caption">
+                                <h5>Hashtags per day</h5>
+                                                <p class="desc">Hashtag evolution per day</p>
+                                <p><a target="_blank" href="http://10.3.220.50/views/HavenLiveDemos-01b-Hashtags/2-BubblesPerDay?:embed=y" class="btn btn-primary">Demo</a>
+<a target="_blank" href="http://10.3.220.51/views/HavenLiveDemos-01b-Hashtags/2-BubblesPerDay?:embed=y" class="btn">Backup link</a> </p>
+                              </div>
+                            </div>
+                            </div><div class="col-lg-6">
+                            <div class="thumbnail right-caption span4">
+                               <div class="img-block"><img src="./img/01b-3-SentimentEvolution.png" alt=""></div>
+                              <div class="caption">
+                                <h5>Hashtags and sentiment</h5>
+                                                <p class="desc">Mixing hastags and associated sentiments over time</p>
+                                <p><a target="_blank" href="http://10.3.220.50/views/HavenLiveDemos-01b-Hashtags/3-SentimentEvolution?:embed=y" class="btn btn-primary">Demo</a>
+<a target="_blank" href="http://10.3.220.51/views/HavenLiveDemos-01b-Hashtags/3-SentimentEvolution?:embed=y" class="btn">Backup link</a> </p>
+                              </div>
+                            </div>
+                            </div><div class="col-lg-6">
+                            <div class="thumbnail right-caption span4">
+                               <div class="img-block"><img src="./img/01b-4-GeoFollowUp.png" alt=""></div>
+                              <div class="caption">
+                                <h5>Hashtag Geo map</h5>
+                                                <p class="desc">Showing where hastags appear on a map based on geotagged tweets</p>
+                                <p><a target="_blank" href="http://10.3.220.50/views/HavenLiveDemos-01b-Hashtags/4-GeoFollowUp?:embed=y" class="btn btn-primary">Demo</a>
+<a target="_blank" href="http://10.3.220.51/views/HavenLiveDemos-01b-Hashtags/4-GeoFollowUp?:embed=y" class="btn">Backup link</a> </p>
+                              </div>
+                            </div>
+                            </div><div class="col-lg-6">
+                            <div class="thumbnail right-caption span4">
+                               <div class="img-block"><img src="./img/01c-1-SentimEvolutionPerDay.png" alt=""></div>
+                              <div class="caption">
+                                <h5>Customization - Sentiment per week</h5>
+                                                <p class="desc">Following twitter activity and sentiment associated to companies</p>
+                                <p><a target="_blank" href="http://10.3.220.50/views/HavenLiveDemos-01c-CustomTweets/1-SentimEvolutionPerDay?:embed=y" class="btn btn-primary">Demo</a>
+<a target="_blank" href="http://10.3.220.51/views/HavenLiveDemos-01c-CustomTweets/1-SentimEvolutionPerDay?:embed=y" class="btn">Backup link</a> </p>
+                              </div>
+                            </div>
+                            </div><div class="col-lg-6">
+                            <div class="thumbnail right-caption span4">
+                               <div class="img-block"><img src="./img/01c-2-SentimEvolutionPerHour.png" alt=""></div>
+                              <div class="caption">
+                                <h5>Customization - Sentiment per day</h5>
+                                                <p class="desc">Following twitter activity and sentiment associated to companies</p>
+                                <p><a target="_blank" href="http://10.3.220.50/views/HavenLiveDemos-01c-CustomTweets/2-SentimEvolutionPerHour?:embed=y " class="btn btn-primary">Demo</a>
+<a target="_blank" href="http://10.3.220.51/views/HavenLiveDemos-01c-CustomTweets/2-SentimEvolutionPerHour?:embed=y " class="btn">Backup link</a> </p>
+                              </div>
+                            </div>
+                            </div><div class="col-lg-6">
+                            <div class="thumbnail right-caption span4">
+                               <div class="img-block"><img src="./img/01c-3-TweetsPerMin.png" alt=""></div>
+                              <div class="caption">
+                                <h5>Customization - Tweets per min</h5>
+                                                <p class="desc">Following twitter activity and sentiment associated to companies</p>
+                                <p><a target="_blank" href="http://10.3.220.50/views/HavenLiveDemos-01c-CustomTweets/3-TweetsPerMin?:embed=y" class="btn btn-primary">Demo</a>
+<a target="_blank" href="http://10.3.220.51/views/HavenLiveDemos-01c-CustomTweets/3-TweetsPerMin?:embed=y" class="btn">Backup link</a> </p>
+                              </div>
+                            </div>
+                            </div><div class="col-lg-6">
+                            <div class="thumbnail right-caption span4">
+                               <div class="img-block"><img src="./img/01c-4-Influencers.png" alt=""></div>
+                              <div class="caption">
+                                <h5>Customization - Influencers dashboard</h5>
+                                                <p class="desc">View of influencers and sentiments for the customized companies or topics</p>
+                                <p><a target="_blank" href="http://10.3.220.50/views/HavenLiveDemos-01c-CustomTweets/4-Influencers?:embed=y" class="btn btn-primary">Demo</a>
+<a target="_blank" href="http://10.3.220.51/views/HavenLiveDemos-01c-CustomTweets/4-Influencers?:embed=y" class="btn">Backup link</a> </p>
+                              </div>
+                            </div>
+                            </div><div class="col-lg-6">
+                            <div class="thumbnail right-caption span4">
+                               <div class="img-block"><img src="./img/01c-5-GeotaggedTweets.png" alt=""></div>
+                              <div class="caption">
+                                <h5>Customization - Geotagged tweets</h5>
+                                                <p class="desc">A geographical view of geotagged tweets</p>
+                                <p><a target="_blank" href="http://10.3.220.50/views/HavenLiveDemos-01c-CustomTweets/5-GeotaggedTweets?:embed=y" class="btn btn-primary">Demo</a>
+<a target="_blank" href="http://10.3.220.51/views/HavenLiveDemos-01c-CustomTweets/5-GeotaggedTweets?:embed=y" class="btn">Backup link</a> </p>
+                              </div>
+                            </div>
+                            </div>
+        </div>
+        
+        <div class="row col-xs-12">
+            <h2>Demo 02 - Image Analysis</h2>
+            <hr>
+       </div>
+        <div class="row">
+            <div class="col-lg-6">
+                            <div class="thumbnail right-caption span4">
+                               <div class="img-block"><img src="./img/02-1-RecoPatterns.png" alt=""></div>
+                              <div class="caption">
+                                <h5>Recognized patterns and logo</h5>
+                                                <p class="desc">Patterns recognized in images attached to tweets</p>
+                                <p><a target="_blank" href="http://10.3.220.50/views/HavenLiveDemos-02-ImageAnalysis/1-RecoPatterns?:embed=y" class="btn btn-primary">Demo</a>
+<a target="_blank" href="http://10.3.220.51/views/HavenLiveDemos-02-ImageAnalysis/1-RecoPatterns?:embed=y" class="btn">Backup link</a> </p>
+                              </div>
+                            </div>
+                            </div><div class="col-lg-6">
+                            <div class="thumbnail right-caption span4">
+                               <div class="img-block"><img src="./img/02-2-ImgAnalysisRT.png" alt=""></div>
+                              <div class="caption">
+                                <h5>Images analysis follow-up</h5>
+                                                <p class="desc">A view of freshly analyzed images (with patterns detected)</p>
+                                <p><a target="_blank" href="http://10.3.220.50/views/HavenLiveDemos-02-ImageAnalysis/2-ImgAnalysisRT?:embed=y" class="btn btn-primary">Demo</a>
+<a target="_blank" href="http://10.3.220.51/views/HavenLiveDemos-02-ImageAnalysis/2-ImgAnalysisRT?:embed=y" class="btn">Backup link</a> </p>
+                              </div>
+                            </div>
+                            </div>
+        </div>
+        
+        <div class="row col-xs-12">
+            <h2>Demo 03 - Smart Data Lake</h2>
+            <hr>
+       </div>
+        <div class="row">
+            <div class="col-lg-6">
+                            <div class="thumbnail right-caption span4">
+                               <div class="img-block"><img src="./img/03-1-WordCount.png" alt=""></div>
+                              <div class="caption">
+                                <h5>Word count</h5>
+                                                <p class="desc">Distribution of words in documents stored in the datalake</p>
+                                <p><a target="_blank" href="http://10.3.220.50/views/HavenLiveDemos-03-SmartDataLake/1-WordCount?:embed=y" class="btn btn-primary">Demo</a>
+<a target="_blank" href="http://10.3.220.51/views/HavenLiveDemos-03-SmartDataLake/1-WordCount?:embed=y" class="btn">Backup link</a> </p>
+                              </div>
+                            </div>
+                            </div><div class="col-lg-6">
+                            <div class="thumbnail right-caption span4">
+                               <div class="img-block"><img src="./img/03-2-TopContributors.png" alt=""></div>
+                              <div class="caption">
+                                <h5>Top contributors</h5>
+                                                <p class="desc">Main contributors extracted from documents meta-data</p>
+                                <p><a target="_blank" href="http://10.3.220.50/views/HavenLiveDemos-03-SmartDataLake/2-TopContributors?:embed=y" class="btn btn-primary">Demo</a>
+<a target="_blank" href="http://10.3.220.51/views/HavenLiveDemos-03-SmartDataLake/2-TopContributors?:embed=y" class="btn">Backup link</a> </p>
+                              </div>
+                            </div>
+                            </div><div class="col-lg-6">
+                            <div class="thumbnail right-caption span4">
+                               <div class="img-block"><img src="./img/03-3-EntityExtraction.png" alt=""></div>
+                              <div class="caption">
+                                <h5>Entity extraction</h5>
+                                                <p class="desc">Entities extracted from the documents in the datalake</p>
+                                <p><a target="_blank" href="http://10.3.220.50/views/HavenLiveDemos-03-SmartDataLake/3-EntityExtraction?:embed=y" class="btn btn-primary">Demo</a>
+<a target="_blank" href="http://10.3.220.51/views/HavenLiveDemos-03-SmartDataLake/3-EntityExtraction?:embed=y" class="btn">Backup link</a> </p>
+                              </div>
+                            </div>
+                            </div><div class="col-lg-6">
+                            <div class="thumbnail right-caption span4">
+                               <div class="img-block"><img src="./img/03-4-TopicEvolution.png" alt=""></div>
+                              <div class="caption">
+                                <h5>Topic Evolution</h5>
+                                                <p class="desc">Vizualizing topic evolution based on document creation date</p>
+                                <p><a target="_blank" href="http://10.3.220.50/views/HavenLiveDemos-03-SmartDataLake/4-TopicEvolution?:embed=y" class="btn btn-primary">Demo</a>
+<a target="_blank" href="http://10.3.220.51/views/HavenLiveDemos-03-SmartDataLake/4-TopicEvolution?:embed=y" class="btn">Backup link</a> </p>
+                              </div>
+                            </div>
+                            </div>
+        </div>
+        
+        <div class="row col-xs-12">
+            <h2>Demo 04 - Text Mining on News</h2>
+            <hr>
+       </div>
+        <div class="row">
+            <div class="col-lg-6">
+                            <div class="thumbnail right-caption span4">
+                               <div class="img-block"><img src="./img/04-1-haven02.png" alt=""></div>
+                              <div class="caption">
+                                <h5>Cluster vizualization from Idol with d3js</h5>
+                                                <p class="desc">Forced-graph visualization of news clustered by IDOL</p>
+                                <p><a target="_blank" href="http://10.3.220.52/haven02/" class="btn btn-primary">Demo</a> </p>
+                              </div>
+                            </div>
+                            </div><div class="col-lg-6">
+                            <div class="thumbnail right-caption span4">
+                               <div class="img-block"><img src="./img/04-2-NewsSpectrum.png" alt=""></div>
+                              <div class="caption">
+                                <h5>News Spectrum (public web)</h5>
+                                                <p class="desc">Website demonstrating IDOL based news spectrograph</p>
+                                <p><a target="_blank" href="http://news-spectrum.com/" class="btn btn-primary">Demo</a> </p>
+                              </div>
+                            </div>
+                            </div><div class="col-lg-6">
+                            <div class="thumbnail right-caption span4">
+                               <div class="img-block"><img src="./img/04-3-NewsWall.png" alt=""></div>
+                              <div class="caption">
+                                <h5>News Wall (public web)</h5>
+                                                <p class="desc">Website demonstrating IDOL based news clustering and spectrograph</p>
+                                <p><a target="_blank" href="http://www.newswall.ch/" class="btn btn-primary">Demo</a> </p>
+                              </div>
+                            </div>
+                            </div>
+        </div>
+        
+    </div>
+        </div><!-- /.container -->
+    </body>
+    </html>

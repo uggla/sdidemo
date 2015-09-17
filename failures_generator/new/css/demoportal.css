@@ -1,0 +1,111 @@
+
+ @font-face { font-family: HPSimp; src: url('../fonts/HPSimplified.ttf'); }
+ @font-face { font-family: HPSimp_LT; src: url('../fonts/HPSIMPLIFIED_LT.TTF'); }
+/* Move down content because we have a fixed navbar that is 50px tall */
+body {
+  padding-top: 50px;
+  padding-bottom: 20px;
+  font-family: "HPSimp_LT";
+}
+
+h5 {
+	font-family: "HPSimp_LT";
+	font-weight: bold;
+	font-size: 18px;
+	margin-top: 0;
+	margin-bot: 5px;
+}
+
+h1, h2, h3, h4 {
+	font-family: "HPSimp_LT";
+	font-weight: bold;
+	
+}
+
+
+.navbar-brand-img{
+	padding: 0px 0px;
+	margin-right:10px;
+	height:40px;
+	width:40px;
+	margin-top: 5px;
+	margin-left: 20px;
+
+}
+
+.none { display: none;}
+
+a.btn {
+	border: 1px solid #2780e3;
+}
+a.btn:hover {
+	color:#1967be ;
+	border: 1px solid #1967be;
+
+}
+
+.btn:hover {
+	color:black ;
+	background-color:#929292;
+}
+
+a.btn.btn-primary {
+	border: 1px solid #2780e3;
+}
+
+.btn.btn-primary:hover {
+	color:white ;
+	background-color:#1967be;
+}
+
+.thumbnail.right-caption > .caption p {
+    min-height: 29px;
+}
+
+.thumbnail .caption .desc {
+	line-height: 1;
+	font-size: 13px;
+}
+
+body > .container {
+	padding-top: 50px;
+}
+.row > div {
+	padding-left: 5px;
+	padding-right: 5px;
+}
+.thumbnail {
+	width:100%;
+}
+.thumbnail.right-caption .img-block {
+	width: 170px;
+	height: 240px;
+	overflow: hidden;
+	float: left;
+	margin-right: 13px;
+}
+.thumbnail.right-caption .img-block > img {
+    float: left;
+    
+    margin-right: 9px;
+    width: 246px;
+	max-height: 160px;
+	-ms-transform: scale(1.3)translate(-0px, 16px);
+    -webkit-transform: scale(1.3)translate(-0px, 16px);
+    transform: scale(1.3)translate(-0px, 16px);
+    transition: all .2s ease-in-out;
+}
+.thumbnail.right-caption .img-block > img:hover {
+	transform: scale3d(1.4, 1.4, 1.4)translate(-0px, 16px);
+	-webkit-transform: scale3d(1.4, 1.4, 1.4)translate(-0px, 16px);
+	-ms-transform: scale(1.4)translate(-0px, 16px);
+}
+
+.thumbnail.right-caption {
+    float: left;
+}
+
+.thumbnail.right-caption > .caption {
+    padding: 4px;
+}
+​
