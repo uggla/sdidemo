@@ -7,10 +7,10 @@
     <meta name="description" content="">
     <meta name="author" content="René Ribaud" >
     <link rel="icon" href="images/favicon.ico">
-    <meta http-equiv="refresh" content="10"> 
+    <!-- <meta http-equiv="refresh" content="10"> -->
     <meta name="description" content="Generate a failure">
     <meta name="author" content="René Ribaud">
-    <meta http-equiv="refresh" content="5" url="http://10.3.8.29/failures_generator">
+    <!-- <meta http-equiv="refresh" content="5" url="http://10.3.8.29/failures_generator"> -->
 
     <title>Failure Generator</title>
 
@@ -45,7 +45,7 @@
 
     <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
 
-		<img class="navbar-brand navbar-brand-img" alt="HP" src="images/hpwhite.png"/>
+		<img class="navbar-brand navbar-brand-img" alt="HP" src="images/hpelogo.png"/>
 
 		  <div class="navbar-brand">
 		  Failure Generator

@@ -22,40 +22,60 @@ h1, h2, h3, h4 {
 	
 }
 
+.navbar-inverse{
+	background-color: #425563;
+
+}
+
+.navbar-brand{
+	padding: 22.5px 20px;
+	margin-left: 50px;
+	margin-right: 40px;
+}
 
 .navbar-brand-img{
 	padding: 0px 0px;
 	margin-right:10px;
-	height:40px;
-	width:40px;
+	height:60px;
+	width:128px;
 	margin-top: 5px;
 	margin-left: 20px;
 
 }
 
+.navbar-nav li a {
+	padding-bottom: 23.5px;
+	padding-top: 23.5px;
+
+}
+
+.navbar-inverse .navbar-nav > .active > a, .navbar-inverse .navbar-nav > .active > a:hover, .navbar-inverse .navbar-nav > .active > a:focus {color:#C6C9CA;background-color:#425563;}
+
 .none { display: none;}
 
 a.btn {
-	border: 1px solid #2780e3;
+	border: 1px solid #2AD2C9;
 }
 a.btn:hover {
-	color:#1967be ;
-	border: 1px solid #1967be;
+	color:#425563 ;
+	border: 1px solid #2AC2C9;
 
 }
 
 .btn:hover {
 	color:black ;
-	background-color:#929292;
+	background-color:#425563;
 }
 
-a.btn.btn-primary {
-	border: 1px solid #2780e3;
+.btn.btn-primary {
+	border: 1px solid #2AC2C9;
+	background-color:#2AC2C9;
 }
 
 .btn.btn-primary:hover {
-	color:white ;
-	background-color:#1967be;
+	color: #FFFFFF;
+	border: 1px solid #425563;
+	background-color: #425563;
 }
 
 .thumbnail.right-caption > .caption p {
@@ -108,4 +128,3 @@ body > .container {
 .thumbnail.right-caption > .caption {
     padding: 4px;
 }
-​

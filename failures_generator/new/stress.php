@@ -42,7 +42,7 @@
 <body>
     <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
 
-		<img class="navbar-brand navbar-brand-img" alt="HP" src="images/hpwhite.png"/>
+		<img class="navbar-brand navbar-brand-img" alt="HP" src="images/hpelogo.png"/>
 
 		  <div class="navbar-brand">
 		  Failure Generator
