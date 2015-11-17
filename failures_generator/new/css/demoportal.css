@@ -1,15 +1,13 @@
 
- @font-face { font-family: HPSimp; src: url('../fonts/HPSimplified.ttf'); }
- @font-face { font-family: HPSimp_LT; src: url('../fonts/HPSIMPLIFIED_LT.TTF'); }
 /* Move down content because we have a fixed navbar that is 50px tall */
 body {
   padding-top: 50px;
   padding-bottom: 20px;
-  font-family: "HPSimp_LT";
+  font-family: "Arial";
 }
 
 h5 {
-	font-family: "HPSimp_LT";
+	font-family: "Arial";
 	font-weight: bold;
 	font-size: 18px;
 	margin-top: 0;
@@ -17,7 +15,7 @@ h5 {
 }
 
 h1, h2, h3, h4 {
-	font-family: "HPSimp_LT";
+	font-family: "Arial";
 	font-weight: bold;
 	
 }
