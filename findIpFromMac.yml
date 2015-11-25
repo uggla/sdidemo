@@ -8,16 +8,16 @@
   tasks:
 
     - name: Probe backend network subnet
-      shell: nmap -sP 192.168.21-23.0/24 ; arp -an | grep -i "{{ macaddressclient }}"
+      shell: nmap -n -T5 -sP 192.168.21-23.0/24 ; arp -an | grep -i "{{ macaddressclient }}"
       delegate_to: localhost
       register: result
       delegate_to: localhost
       until: result.rc == 0
-      retries: 15
+      retries: 30
       delay: 20
 
     - name: Probe mgmt network subnet
-      shell: nmap -sP 10.3.8.0/24
+      shell: nmap -n -T5 -sP 10.3.8.0/24
       delegate_to: localhost
 
     - name: Get client IP from mac
@@ -30,7 +30,11 @@
       delegate_to: localhost
       register: mgmtipaddress
 
-    - name : Register this server clinet IP into CMDB
+    - name : Register this server mgmt IP into CMDB
+      shell: ~/ansible/manage_3tiers_data.py add "{{ SubscriptionID }}" database1 {{ mgmtipaddress.stdout }}
+      delegate_to: localhost
+
+    - name : Register this server client IP into CMDB
       shell: ~/ansible/manage_3tiers_data.py add "{{ SubscriptionID }}" database1-client {{ ipaddressClient.stdout }}
       delegate_to: localhost
 
