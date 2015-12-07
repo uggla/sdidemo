@@ -1,0 +1,12 @@
+- name: Scan lun for adding storage
+  hosts: "{{ SubscriptionID }}"
+  gather_facts: False
+  remote_user: root
+  
+  vars: 
+    - home_dir: "~"
+    - known_hosts_file: "{{ home_dir }}/.ssh/known_hosts"
+  
+  tasks:
+    - name: Umount the volume
+      shell: for i in $(mount | grep 3par | awk '{print $3}'); do umount $i;done

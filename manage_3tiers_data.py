@@ -73,7 +73,11 @@ if __name__ == '__main__':
 
     if (arguments.action == 'remove'):
         del datafile[arguments.uuid][arguments.type]
-        del datafile[arguments.uuid][arguments.type + "-hostname"]
+        try:
+            del datafile[arguments.uuid][arguments.type + "-hostname"]
+        except:
+            # This is to handle case where "-hostname" is not defined. Ugly code ! isn'it ? :)
+            pass
         if len(datafile[arguments.uuid])== 1:
             del datafile[arguments.uuid]["lastupdate"]
             del datafile[arguments.uuid]
