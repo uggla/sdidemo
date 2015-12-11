@@ -1,4 +1,4 @@
-- name: Scan lun for adding storage
+- name: Scan 3PAR lun for adding storage
   hosts: "{{ SubscriptionID }}"
   gather_facts: False
   remote_user: root

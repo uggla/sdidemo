@@ -1,0 +1,41 @@
+- name: Scan VSA lun for adding storage
+  hosts: "{{ SubscriptionID }}"
+  gather_facts: False
+  remote_user: root
+  
+  vars: 
+    - home_dir: "~"
+    - known_hosts_file: "{{ home_dir }}/.ssh/known_hosts"
+  
+  tasks:
+    - name: Install iscsi tools
+      yum: name=iscsi-initiator-utils
+    
+    - name: Install lssci
+      yum: name=lsscsi
+
+    - name: Install multipath
+      yum: name=device-mapper-multipath state=present
+
+    - name: Scan iscsi bus
+      shell: iscsiadm -m discovery -t sendtargets -p 10.3.8.43 | grep iqn | tail -1 | awk '{print $2}'
+      register: volumeid
+
+    - name: Login to the iscsi target
+      shell: test -n "{{ volumeid.stdout }}" && iscsiadm -m node -T {{ volumeid.stdout }} --login
+      ignore_errors: yes
+
+    - name: Update multipath
+      shell: multipath
+
+    - name: Get latest mpath
+      shell: multipath -ll | grep mpath | grep LEFTHAND | tail -1 | awk '{print $1}'
+      register: mpath_to_use
+
+    - name: Format volume
+      shell: mkfs.ext4 /dev/mapper/{{ mpath_to_use.stdout }} && mkdir -p /vsa/{{ mpath_to_use.stdout }}
+      args:
+          creates: /3par/{{ mpath_to_use.stdout }}
+
+    - name: Mount the volume
+      shell: mount | grep /dev/mapper/{{ mpath_to_use.stdout }} || mount /dev/mapper/{{ mpath_to_use.stdout }} /vsa/{{ mpath_to_use.stdout }}
