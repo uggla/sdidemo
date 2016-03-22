@@ -19,8 +19,8 @@
       delegate_to: localhost
 
     - name: Install Epel repo
-      shell: rpm -Uvh https://dl.fedoraproject.org/pub/epel/epel-release-latest-6.noarch.rpm
-      retries: 3
+      shell: rpm -q epel-release || rpm -Uvh https://dl.fedoraproject.org/pub/epel/epel-release-latest-6.noarch.rpm
+      retries: 2
       delay: 2
 
     - name: Install unzip
